@@ -9,12 +9,21 @@
   "disable-hardware-acceleration": true,
   "extensions.autoUpdate": "onlyEnabledExtensions",
   "javascript.updateImportsOnFileMove.enabled": "always",
-  "[html]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
+  "typescript.updateImportsOnFileMove.enabled": "always",
   "yaml.schemas": {
     "file:///home/aldimhr/.vscode/extensions/atlassian.atlascode-2.10.11/resources/schemas/pipelines-schema.json": "bitbucket-pipelines.yml"
   },
+
+  /*  -- LANGUAGE  */
+  "[cpp]": {
+    "editor.defaultFormatter": "ms-vscode.cpptools"
+  },
+  "[html]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+
+  /*  -- EXPERIMENTAL  */
+  // "workbench.experimental.settingsProfiles.enabled": true,
 
   /*  -- WORKBENCH  */
   // "workbench.activityBar.visible": false,
@@ -36,6 +45,7 @@
 
   /*  -- EDITOR */
   // "editor.colorDecorators": false,
+  // "editor.stickyScroll.enabled": true,
   "editor.tabSize": 2,
   "editor.rulers": [100],
   "editor.lineHeight": 27,
@@ -47,13 +57,15 @@
   "editor.minimap.enabled": false,
   "editor.lineNumbers": "relative",
   "editor.guides.bracketPairs": true,
+  "editor.autoClosingQuotes": "always",
   "editor.fontFamily": "JetBrains Mono",
   "editor.bracketPairColorization.enabled": true,
   "editor.acceptSuggestionOnCommitCharacter": false,
   "editor.defaultFormatter": "esbenp.prettier-vscode",
-  "editor.autoClosingQuotes": "always",
+  // "editor.experimental.stickyScroll.enabled": true, // experimental
 
   /*  -- EXPLORE */
+  "explorer.confirmDelete": false,
   "explorer.compactFolders": false,
   "explorer.confirmDragAndDrop": false,
 
@@ -61,8 +73,9 @@
   "window.zoomLevel": -1,
 
   /*  -- TERMINAL */
+  // "terminal.integrated.defaultProfile.linux": "tmux",
   "terminal.integrated.rendererType": "dom",
-  "terminal.integrated.defaultProfile.linux": "tmux",
+  "terminal.integrated.defaultProfile.linux": "fish",
 
   /*  -- INDENT RAINBOW */
   "indentRainbow.colors": [
@@ -357,6 +370,5 @@
     "**/bower_components": true,
     "**/dist/**": true,
     "**/log/**": true
-  },
-  "explorer.confirmDelete": false
+  }
 }
