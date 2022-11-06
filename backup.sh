@@ -34,7 +34,7 @@ backup(){
             rm -rf ./$BACKUP
         fi
 
-        ln -s $1 ./$BACKUP
+        cp -r $1 ./$BACKUP
         echo -e "\tBackup $BACKUP success"
     else
         if isFile $1
@@ -44,7 +44,7 @@ backup(){
                 rm -f ./$BACKUP
             fi
 
-            ln -s $1 ./$BACKUP
+            cp $1 ./$BACKUP
             echo -e "\tBackup $BACKUP success"
         else
             echo -e "\t$1 is not exist"
@@ -88,16 +88,3 @@ backup $TMUX
 NVIM=~/.config/nvim
 
 backup $NVIM
-
-#
-# echo "Backup Neovim config - $NVIM_PATH"
-#
-# if [[ -d "$NVIM_DIR" ]]
-# then
-#     echo "    $NVIM_DIR is exist"
-# else
-#     echo "    $NVIM_DIR is not exist, make symbolic link for Neovim config $NVIM_PATH"
-#     ln -s $NVIM_PATH ./nvim
-#     echo "    Success make nvim symbolic link!"
-# fi
-#

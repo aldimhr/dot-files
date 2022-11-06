@@ -1,1 +1,89 @@
-/home/aldimhr/.config/Code/User/keybindings.json
+// Place your key bindings in this file to override the defaultsauto[]
+[
+  //========== vim
+  {
+    // from main editor to terminal
+    "key": "ctrl+j",
+    "command": "workbench.action.terminal.focus",
+    "when": "terminal.visible"
+  },
+  {
+    // from termial to main editor
+    "key": "ctrl+k",
+    "command": "workbench.action.focusActiveEditorGroup",
+    "when": "terminalFocus || workbench.panel.output.active"
+  },
+  {
+    // menu to main editor ←
+    "key": "ctrl+l",
+    "when": "!sideBarFocus",
+    "command": "workbench.action.focusSideBar"
+  },
+  {
+    // menu to main editor →
+    "key": "ctrl+h",
+    "when": "sideBarFocus",
+    "command": "workbench.action.focusActiveEditorGroup"
+  },
+  {
+    // next file
+    "key": "ctrl+tab",
+    "command": "workbench.action.nextEditor"
+  },
+  {
+    // previous file
+    "key": "ctrl+shift+tab",
+    "command": "workbench.action.previousEditor"
+  },
+  {
+    // next suggestion
+    "key": "tab",
+    "command": "selectNextSuggestion",
+    "when": "editorTextFocus && suggestWidgetMultipleSuggestions && suggestWidgetVisible"
+  },
+  {
+    // previous suggestion
+    "key": "shift+tab",
+    "command": "selectPrevSuggestion",
+    "when": "editorTextFocus && suggestWidgetMultipleSuggestions && suggestWidgetVisible"
+  },
+  {
+    // toggle on/off VIM
+    "key": "ctrl+alt+v",
+    "command": "toggleVim"
+  },
+  {
+    // create new file
+    "key": "ctrl+n",
+    "command": "extension.advancedNewFile"
+  },
+  //========== end vim
+  {
+    "key": "shift+alt+down",
+    "command": "editor.action.copyLinesDownAction",
+    "when": "editorTextFocus && !editorReadonly"
+  },
+  {
+    "key": "ctrl+shift+alt+down",
+    "command": "-editor.action.copyLinesDownAction",
+    "when": "editorTextFocus && !editorReadonly"
+  },
+  {
+    "key": "shift+alt+up",
+    "command": "editor.action.copyLinesUpAction",
+    "when": "editorTextFocus && !editorReadonly"
+  },
+  {
+    "key": "ctrl+shift+alt+up",
+    "command": "-editor.action.copyLinesUpAction",
+    "when": "editorTextFocus && !editorReadonly"
+  },
+  {
+    "key": "ctrl+f o",
+    "command": "explorer.newFolder"
+  },
+  {
+    "key": "ctrl+meta+`",
+    "command": "workbench.action.toggleMaximizedPanel"
+  }
+]

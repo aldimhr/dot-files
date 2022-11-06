@@ -1,0 +1,9 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhistcnt =7
+let g:netrw_dirhist_7='/home/aldimhr/datdes/Komputasi/Github/leetcode'
+let g:netrw_dirhist_6='/home/aldimhr/.vim'
+let g:netrw_dirhist_5='/home/aldimhr/datdes'
+let g:netrw_dirhist_4='/home/aldimhr/datdes/Komputasi/wordpress/theme-development/uploads.ini'
+let g:netrw_dirhist_3='/home/aldimhr/datdes/Komputasi/wordpress/theme-development/docker-compose.yml'
+let g:netrw_dirhist_2='/home/aldimhr/.vim/plugged/html5.vim'
+let g:netrw_dirhist_1='/home/aldimhr/datdes/Komputasi/wordpress/theme-test/uploads.ini'
