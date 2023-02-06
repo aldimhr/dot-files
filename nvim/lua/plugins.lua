@@ -16,23 +16,37 @@ require('packer').init({
   compile_path = vim.fn.stdpath('config') .. '/plugin/packer_compiled.lua',
 })
 
-return require('packer').startup(function(use)
+return packer.startup(function(use)
     use 'mattn/emmet-vim' -- Autocompletion for html and css
     use 'Shatur/neovim-ayu' -- ayu theme for lualine
     use 'neovim/nvim-lspconfig' -- Configurations for Nvim LSP
     use 'wbthomason/packer.nvim' -- Packer can manage itself
     use 'ray-x/lsp_signature.nvim'  -- popup in typing
     use 'lewis6991/impatient.nvim' -- speed up loading lua modules
+    use 'ellisonleao/gruvbox.nvim' -- colorscheme/main theme
+    use 'wakatime/vim-wakatime' -- code stats
 
     use {
-      'ellisonleao/gruvbox.nvim', -- colorscheme/main theme
+        "williamboman/mason.nvim", -- lang server installer
+        config = function ()
+          require('config.mason-nvim')
+        end,
     }
+
+    use {
+      'jose-elias-alvarez/null-ls.nvim', -- formatter, diagnostics, etc
+      requires = { 'nvim-lua/plenary.nvim' },
+      config = function() require('config.null-ls') end
+    }
+
+    use { "jayp0521/mason-null-ls.nvim" } -- bridge null-ls and mason-nvim 
+    use {"williamboman/mason-lspconfig.nvim"}  -- bridge lspconfig and mason-nvim
 
     use {
       'nvim-telescope/telescope.nvim', -- file exploler
       branch = '0.1.x',
-      requires = { 
-            { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' },  
+      requires = {
+            { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' },
             { "nvim-telescope/telescope-file-browser.nvim" },
             -- 'nvim-tree/nvim-web-devicons',
             -- {'zane-/cder.nvim'}
@@ -81,7 +95,7 @@ return require('packer').startup(function(use)
 
     use {
         "nvim-treesitter/nvim-treesitter", -- treesitter
-        -- commit = 'c6992f69d303cee0b43fd59125cb7afb0262d8fe', -- error
+        run = ":TSUpdate",
         config = function() require('config.nvim-treesitter') end,
     }
 
@@ -101,11 +115,6 @@ return require('packer').startup(function(use)
         config = function() require("nvim-autopairs").setup {} end
     }
 
-    use {
-      'jose-elias-alvarez/null-ls.nvim', -- formatter, diagnostics, etc
-      requires = { 'nvim-lua/plenary.nvim' },
-      config = function() require('config.null-ls') end
-    }
 
     use {
       'hrsh7th/nvim-cmp', -- Autocomplete plugin

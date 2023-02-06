@@ -6,12 +6,12 @@ end
 
 local util = require "formatter.util"
 
-local prettierd = function () 
+local prettierd = function ()
     return {
         exe = "prettierd",
         stdin = true,
         args = {
-            util.escape_path(util.get_current_buffer_file_path()), 
+            util.escape_path(util.get_current_buffer_file_path()),
             "--tab-width=4",
             "--print-width=120",
             "--single-quote"

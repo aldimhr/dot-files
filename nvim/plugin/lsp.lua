@@ -1,3 +1,8 @@
+local mason_ok, mason = pcall(require, 'mason')
+if not mason_ok then
+   return
+end
+
 local lspconfig_ok, lspconfig = pcall(require, "lspconfig")
 if not lspconfig_ok then
   print ('lspconfig not found!')
@@ -10,7 +15,16 @@ if not lsp_signature_ok then
   return
 end
 
+-- MASON.NVIM SETUP {{
+
+mason.setup {}
+require("mason-lspconfig").setup()
+
+-- }}
+
+local vim = vim
 local cwd = vim.loop.cwd
+local root_pattern = lspconfig.util.root_pattern
 
 local on_attach = function(client, bufnr)
 
@@ -45,6 +59,7 @@ local on_attach = function(client, bufnr)
     vim.keymap.set('n', '<space>f', vim.lsp.buf.formatting, bufopts)
 end
 
+
 vim.lsp.handlers['textDocument/publishDiagnostics'] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
   underline = false,
   virtual_text = {
@@ -62,7 +77,7 @@ vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(
 )
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities.textDocument.completion.completionItem.snippetSupport = true 
+capabilities.textDocument.completion.completionItem.snippetSupport = true
 capabilities.textDocument.foldingRange = { -- folding helpers / nvim-ufo
     dynamicRegistration = false,
     lineFoldingOnly = true
@@ -86,6 +101,26 @@ for _, lsp in ipairs(servers) do
       root_dir = cwd,
   }
 end
+
+require("mason-lspconfig").setup_handlers({
+    function (server_name)
+        local opts = {
+            capabilities = capabilities,
+            on_attach = on_attach,
+            root_dir = cwd,
+        }
+
+        require("lspconfig")[server_name].setup(opts)
+    end,
+    -- ["jdtls"] = function ()
+    --    require("lspconfig").jdtls.setup(vim.tbl)
+    -- end,
+    -- ["clangd"] = function ()
+    --     require("lspconfig").clangd.setup(vim.tbl_deep_extend("force", lsp_options, {
+    --         capabilities = { offsetEncoding = { "utf-16" } }
+    --     }))
+    -- end,
+})
 
 lspconfig.emmet_ls.setup({
     on_attach = on_attach,
@@ -123,9 +158,7 @@ lspconfig.tailwindcss.setup {
       new_config.settings.editor.tabSize = vim.lsp.util.get_effective_tabstop()
     end
   end,
-  -- root_dir = function()
-  --   return root_pattern('tailwind.config.js', 'tailwind.config.ts', 'postcss.config.js', 'postcss.config.ts', 'package.json', 'node_modules', '.git')
-  -- end,
+  root_dir = root_pattern('tailwind.config.js', 'tailwind.config.ts', 'postcss.config.js', 'postcss.config.ts', 'package.json', 'node_modules', '.git'),
   settings = {
     tailwindCSS = {
       lint = {

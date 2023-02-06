@@ -1,5 +1,5 @@
 local ok, null_ls = pcall(require, 'null-ls')
-if not ok then 
+if not ok then
   print ('null-ls not found!')
   return
 end
@@ -10,10 +10,22 @@ local formatting = null_ls.builtins.formatting -- formatting sources
 local hover = null_ls.builtins.hover -- hover sources
 local completion = null_ls.builtins.completion -- completion sources
 
+-- NULL LS MASON SETUP
+require ('mason-null-ls').setup({
+    automatic_setup = true,
+})
+
 null_ls.setup {
   sources = {
     code_actions.eslint_d,
-    diagnostics.jshint,
+    diagnostics.jshint.with({
+        extra_args = function(params)
+                return {
+                    "--esversion=6",
+                    "--curly"
+                }
+        end
+    }),
     diagnostics.tidy,
     diagnostics.todo_comments,
     -- formatting.prettierd.with({
@@ -38,7 +50,7 @@ null_ls.setup {
       -- vim.cmd("nnoremap <silent><buffer> <Leader>f :lua vim.lsp.buf.format {async = true}<CR>")
       -- vim.cmd("autocmd BufWritePost <buffer> lua vim.lsp.buf.formatting()") -- format on save
     -- end
- 
+
     -- if client.server_capabilities.documentRangeFormattingProvider then
     --   vim.cmd [[ xnoremap <silent><buffer> <Leader>f :lua vim.lsp.buf.range_formatting({})<CR> ]]
     -- end
